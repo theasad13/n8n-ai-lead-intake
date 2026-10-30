@@ -1,0 +1,94 @@
+[
+  {
+    "sample": "01-hot-web-form.json",
+    "llm": "hot-new-project.json",
+    "expect": {
+      "intent": "new_project",
+      "budget_band": "2k_10k",
+      "urgency": "high",
+      "score": 90,
+      "tier": "hot",
+      "classifier": "llm"
+    }
+  },
+  {
+    "sample": "02-warm-support.json",
+    "llm": "support-existing.json",
+    "expect": {
+      "intent": "support_existing",
+      "budget_band": "unknown",
+      "urgency": "medium",
+      "score": 50,
+      "tier": "warm",
+      "classifier": "llm"
+    }
+  },
+  {
+    "sample": "03-cold-job-seeker.json",
+    "llm": "job-seeker.json",
+    "expect": {
+      "intent": "job_seeker",
+      "score": 25,
+      "tier": "cold",
+      "classifier": "llm"
+    }
+  },
+  {
+    "sample": "04-spam-seo.json",
+    "llm": "spam.json",
+    "expect": {
+      "intent": "spam",
+      "score": 0,
+      "tier": "cold",
+      "suggested_reply": ""
+    }
+  },
+  {
+    "sample": "05-partnership.json",
+    "llm": "fenced-json.json",
+    "expect": {
+      "intent": "partnership",
+      "urgency": "low",
+      "score": 30,
+      "tier": "cold",
+      "classifier": "llm"
+    }
+  },
+  {
+    "sample": "06-email-lead.json",
+    "llm": "invalid-labels.json",
+    "expect": {
+      "source": "email",
+      "intent": "new_project",
+      "budget_band": "10k_plus",
+      "urgency": "low",
+      "score": 80,
+      "tier": "hot",
+      "classifier": "llm+rules"
+    }
+  },
+  {
+    "sample": "10-html-and-injection.json",
+    "llm": "not-json.json",
+    "expect": {
+      "name": "Alex Doe",
+      "intent": "other",
+      "budget_band": "under_500",
+      "score": 30,
+      "tier": "cold",
+      "classifier": "rules"
+    }
+  },
+  {
+    "sample": "01-hot-web-form.json",
+    "llm": "api-error.json",
+    "expect": {
+      "intent": "new_project",
+      "budget_band": "2k_10k",
+      "urgency": "high",
+      "score": 90,
+      "tier": "hot",
+      "classifier": "rules"
+    }
+  }
+]

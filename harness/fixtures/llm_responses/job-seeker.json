@@ -1,0 +1,22 @@
+{
+  "id": "msg_fake_offline",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-haiku-5-5",
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "",
+      "signature": "fake"
+    },
+    {
+      "type": "text",
+      "text": "{\"intent\": \"job_seeker\", \"budget_band\": \"unknown\", \"urgency\": \"medium\", \"summary\": \"Junior developer asking about jobs or an internship.\", \"suggested_reply\": \"\"}"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}

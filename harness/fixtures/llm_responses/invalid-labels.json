@@ -1,0 +1,22 @@
+{
+  "id": "msg_fake_offline",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-haiku-5-5",
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "",
+      "signature": "fake"
+    },
+    {
+      "type": "text",
+      "text": "{\"intent\": \"sales_lead\", \"budget_band\": \"big\", \"urgency\": \"low\", \"summary\": \"Logistics company wants CRM to invoicing integration, about $12k, next quarter.\", \"suggested_reply\": \"Hi Tom,\\n\\nThanks for the details. Which CRM and invoicing tool do you use?\\n\\nBest regards,\\nYour Name\"}"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}

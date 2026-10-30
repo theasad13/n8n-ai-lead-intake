@@ -1,0 +1,9 @@
+{
+  "body": {
+    "name": "Daniel Okafor",
+    "email": "daniel@quillbooks.example",
+    "company": "Quillbooks Ltd (sample)",
+    "message": "Our existing workflow stopped working after we changed our Google account. The error says permission denied. Could you take a look?",
+    "submitted_at": "2026-10-30T11:02:00Z"
+  }
+}

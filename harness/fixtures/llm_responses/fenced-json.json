@@ -1,0 +1,22 @@
+{
+  "id": "msg_fake_offline",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-haiku-5-5",
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "",
+      "signature": "fake"
+    },
+    {
+      "type": "text",
+      "text": "```json\n{\"intent\": \"partnership\", \"budget_band\": \"unknown\", \"urgency\": \"low\", \"summary\": \"Design agency proposes a white-label partnership, next quarter.\", \"suggested_reply\": \"Hi Lena,\\n\\nThanks for thinking of us. Roughly how many client projects a month do you expect?\\n\\nBest regards,\\nYour Name\"}\n```"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}

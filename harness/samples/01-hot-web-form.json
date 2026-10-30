@@ -1,0 +1,12 @@
+{
+  "body": {
+    "name": "Priya Sharma",
+    "email": "Priya.Sharma@bluefin-dental.example",
+    "company": "Bluefin Dental Clinic (sample)",
+    "phone": "+44 20 7946 0001",
+    "message": "We need someone to build an automation that moves new patient enquiries from our website form into our booking system. Our front desk cannot keep up. We would like this live this week if possible.",
+    "budget": "$6,000",
+    "website": "",
+    "submitted_at": "2026-10-30T09:15:00Z"
+  }
+}

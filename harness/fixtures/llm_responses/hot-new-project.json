@@ -1,0 +1,22 @@
+{
+  "id": "msg_fake_offline",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-haiku-5-5",
+  "content": [
+    {
+      "type": "thinking",
+      "thinking": "",
+      "signature": "fake"
+    },
+    {
+      "type": "text",
+      "text": "{\"intent\": \"new_project\", \"budget_band\": \"2k_10k\", \"urgency\": \"high\", \"summary\": \"Dental clinic wants website enquiries sent into its booking system; front desk is overloaded and they want it live this week.\", \"suggested_reply\": \"Hi Priya,\\n\\nThanks for explaining the problem. Which booking system do you use today?\\n\\nBest regards,\\nYour Name\"}"
+    }
+  ],
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0
+  }
+}
