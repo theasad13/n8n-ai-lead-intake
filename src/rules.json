@@ -1,0 +1,46 @@
+{
+  "_comment": "Single source of truth for cleaning limits, keyword rules and scoring weights. scripts/build_workflows.py embeds this file into the n8n Code nodes; lead_logic/logic.py loads it directly.",
+  "limits": {
+    "name": 120,
+    "company": 120,
+    "phone": 30,
+    "message": 4000,
+    "summary": 300,
+    "suggested_reply": 1200
+  },
+  "enums": {
+    "intent": ["new_project", "support_existing", "partnership", "job_seeker", "spam", "other"],
+    "budget_band": ["10k_plus", "2k_10k", "500_2k", "under_500", "unknown"],
+    "urgency": ["high", "medium", "low"]
+  },
+  "intent_rules": [
+    ["spam", ["\\bseo services?\\b", "\\bbacklinks?\\b", "\\bguest posts?\\b", "\\bcasino\\b", "\\bcrypto investment\\b", "\\bloan offer\\b", "\\brank (your|you) (site|website)\\b"]],
+    ["job_seeker", ["\\bmy (resume|cv)\\b", "\\binternship\\b", "\\bjob opening\\b", "\\blooking for a job\\b", "\\bhire me\\b", "\\bopen positions?\\b"]],
+    ["partnership", ["\\bpartnership\\b", "\\bpartner with\\b", "\\bcollaborat", "\\baffiliate\\b", "\\breseller\\b", "\\bwhite[- ]label\\b"]],
+    ["support_existing", ["\\bbug\\b", "\\bbroken\\b", "\\bnot working\\b", "\\bstopped working\\b", "\\bexisting (site|app|system|workflow)\\b", "\\berror\\b", "\\bcrash"]],
+    ["new_project", ["\\bbuild\\b", "\\bneed (a|an|someone)\\b", "\\blooking for (a|an|someone)\\b", "\\bquote\\b", "\\bproposal\\b", "\\bautomat", "\\bintegrat", "\\bnew (website|app|project|system)\\b", "\\bdevelop"]]
+  ],
+  "urgency_rules": {
+    "high": ["\\burgent", "\\basap\\b", "\\btoday\\b", "\\bthis week\\b", "\\bimmediately\\b", "\\bdeadline\\b", "\\bby (monday|tuesday|wednesday|thursday|friday)\\b"],
+    "low": ["\\bno rush\\b", "\\bnext quarter\\b", "\\bsometime\\b", "\\bjust exploring\\b", "\\bnext year\\b", "\\bin a few months\\b"]
+  },
+  "budget_bands_usd": [
+    [500, "under_500"],
+    [2000, "500_2k"],
+    [10000, "2k_10k"]
+  ],
+  "points": {
+    "intent": {"new_project": 40, "support_existing": 25, "partnership": 15, "other": 10, "job_seeker": 0, "spam": 0},
+    "budget_band": {"10k_plus": 35, "2k_10k": 25, "500_2k": 15, "unknown": 10, "under_500": 5},
+    "urgency": {"high": 25, "medium": 15, "low": 5}
+  },
+  "tiers": {"hot": 70, "warm": 40},
+  "reply_templates": {
+    "new_project": "Hi {first_name},\n\nThank you for getting in touch about your project. I have read your message and would like to understand it a little better: what would a successful result look like for you, and is there a date you are working towards?\n\nIf it helps, we can book a short call this week. Just reply with a time that suits you.\n\nBest regards,\n{sender_name}\n{company_name}",
+    "support_existing": "Hi {first_name},\n\nThank you for the details about the problem. To look into it properly, could you tell me when it started and share a screenshot or the exact error message?\n\nI will reply with next steps as soon as I have that.\n\nBest regards,\n{sender_name}\n{company_name}",
+    "partnership": "Hi {first_name},\n\nThank you for reaching out about working together. Could you share a little more about your audience and what a partnership would look like on your side?\n\nBest regards,\n{sender_name}\n{company_name}",
+    "job_seeker": "Hi {first_name},\n\nThank you for your interest. We do not have an open role right now, but we will keep your details on file and contact you if that changes.\n\nBest regards,\n{sender_name}\n{company_name}",
+    "other": "Hi {first_name},\n\nThank you for your message. Could you tell me a bit more about what you need so I can point you in the right direction?\n\nBest regards,\n{sender_name}\n{company_name}",
+    "spam": ""
+  }
+}

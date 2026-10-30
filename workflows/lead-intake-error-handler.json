@@ -1,0 +1,100 @@
+{
+  "name": "Lead Intake - Error Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Error handler\nRuns when the main lead intake workflow fails. Posts one short message with the workflow name, failed node and error text to Discord. Lead contents are not included.\n\nIn the main workflow: Settings -> Error workflow -> pick this workflow.",
+        "height": 240,
+        "width": 560,
+        "color": 3
+      },
+      "id": "66adbb81-ad6d-584f-afa5-ab57dbcf2643",
+      "name": "Note: Error handler",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "0f204d79-589b-5398-9b83-3dd1ac080eb5",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format Error: turn the Error Trigger payload into one short alert message.\n// Mode: Run Once for All Items. Lead contents are left out on purpose, so no\n// personal data ends up in the alert channel.\nreturn $input.all().map((item) => {\n  const data = item.json || {};\n  const execution = data.execution || {};\n  const workflow = data.workflow || {};\n  const error = execution.error || {};\n  const message = String(error.message || 'Unknown error').slice(0, 500);\n  const lines = [\n    'Lead intake workflow failed',\n    'Workflow: ' + (workflow.name || 'unknown'),\n    'Failed node: ' + (execution.lastNodeExecuted || 'unknown'),\n    'Error: ' + message,\n  ];\n  if (execution.url) lines.push('Execution: ' + execution.url);\n  return {\n    json: {\n      alert_text: lines.join('\\n'),\n      workflow_name: workflow.name || '',\n      failed_node: execution.lastNodeExecuted || '',\n      error_message: message,\n      execution_id: execution.id || '',\n    },\n  };\n});\n"
+      },
+      "id": "97592679-84e2-5d53-bf8b-6114fcac3d21",
+      "name": "Format Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "operation": "sendLegacy",
+        "content": "={{ $json.alert_text }}",
+        "options": {}
+      },
+      "id": "feab735a-500a-54bb-b4b8-f1be5ff902c0",
+      "name": "Discord Error Alert",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "REPLACE_ME_DISCORDWEBHOOKAPI",
+          "name": "Discord #ops webhook"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Format Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error": {
+      "main": [
+        [
+          {
+            "node": "Discord Error Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
