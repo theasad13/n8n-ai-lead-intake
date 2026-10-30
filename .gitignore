@@ -1,0 +1,12 @@
+.env
+*.env.local
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+.n8n/
+*.sqlite
+*.log
+tests/_bad.json

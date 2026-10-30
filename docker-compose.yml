@@ -1,0 +1,29 @@
+# Local n8n for trying the lead intake workflow.
+#   cp .env.example .env      (then set N8N_ENCRYPTION_KEY)
+#   docker compose up -d      -> http://localhost:5678
+#   docker compose exec n8n n8n import:workflow --separate --input=/workflows
+services:
+  n8n:
+    # Pinned. The workflows were import-tested against n8n 2.44.6.
+    image: n8nio/n8n:2.44.6
+    restart: unless-stopped
+    ports:
+      # Bound to this machine only. Use a reverse proxy with HTTPS before exposing the webhook.
+      - "127.0.0.1:5678:5678"
+    environment:
+      N8N_HOST: localhost
+      N8N_PORT: "5678"
+      N8N_PROTOCOL: http
+      WEBHOOK_URL: http://localhost:5678/
+      N8N_SECURE_COOKIE: "false"   # only because this local setup has no HTTPS
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:?Set N8N_ENCRYPTION_KEY in .env}
+      GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-UTC}
+      TZ: ${GENERIC_TIMEZONE:-UTC}
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflows:/workflows:ro
+
+volumes:
+  n8n_data:
